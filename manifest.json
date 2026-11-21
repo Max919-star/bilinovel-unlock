@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "哔轻反屏蔽解锁",
+  "version": "1.0.0",
+  "description": "去掉哔哩轻小说移动版的「广告屏蔽器」弹窗，恢复页面滚动，无需关闭去广告插件。",
+  "host_permissions": [
+    "*://*.linovelib.com/*",
+    "*://*.bilinovel.com/*",
+    "*://*.bilinovel.net/*",
+    "*://*.bilinovel.org/*",
+    "*://*.bilinovel.de/*",
+    "*://*.bilinovel.co.uk/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linovelib.com/*",
+        "*://*.bilinovel.com/*",
+        "*://*.bilinovel.net/*",
+        "*://*.bilinovel.org/*",
+        "*://*.bilinovel.de/*",
+        "*://*.bilinovel.co.uk/*"
+      ],
+      "js": ["src/main-world.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "*://*.linovelib.com/*",
+        "*://*.bilinovel.com/*",
+        "*://*.bilinovel.net/*",
+        "*://*.bilinovel.org/*",
+        "*://*.bilinovel.de/*",
+        "*://*.bilinovel.co.uk/*"
+      ],
+      "css": ["src/unlock.css"],
+      "js": ["src/guard.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

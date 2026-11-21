@@ -1,0 +1,12 @@
+{
+  "name": "bilinovel-unlock",
+  "version": "1.0.0",
+  "private": true,
+  "description": "去掉哔哩轻小说移动版的反广告屏蔽弹窗并恢复滚动",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.1"
+  }
+}

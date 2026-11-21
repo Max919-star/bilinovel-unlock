@@ -1,0 +1,18 @@
+#adblock-dialog,
+.fc-ab-root,
+.fc-whitelist-root,
+ins.adsbygoogle {
+  display: none !important;
+}
+
+/* Must out-rank the site's `body.no-scroll { overflow: hidden !important; }` from /public/mesp.css. */
+html body.no-scroll {
+  overflow-y: auto !important;
+}
+
+html body #TextContent,
+html body #acontent,
+html body #volumes,
+html body #volume-list {
+  display: block !important;
+}

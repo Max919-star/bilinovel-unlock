@@ -1,0 +1,58 @@
+! 哔哩轻小说移动版反屏蔽弹窗 — 备用过滤规则
+! 适用域名：bilinovel.com / .net / .org / .de / .co.uk 与 linovelib.com（含所有子域名）
+!
+! 说明：站点的反屏蔽检测写在章节页的 /themes/zhmb/js/readtools.js 里（混淆代码）。
+! 它在发现广告位 ins.adsbygoogle 为空、或广告脚本加载报错时，插入 #adblock-dialog
+! 弹窗，并给 body 加上 no-scroll 类，由 /public/mesp.css 里的
+! `body.no-scroll { overflow: hidden !important }` 锁死滚动。
+! 只隐藏弹窗元素不够，必须同时解除 no-scroll，否则页面无法滑动。
+!
+! 目录页另有 checkAndHandleAdBlock()（/themes/zhmb/js/newread.js），会用随机类名隐藏目录。
+!
+! 这些规则只能“隐藏弹窗 + 解锁滚动”，去不掉检测本身。想连检测一并失效，
+! 请改用本仓库的扩展或油猴脚本（它们在脚本运行前移除广告位并拦截广告加载错误）。
+
+! ------------------------------------------------------------
+! uBlock Origin 与 AdGuard（都支持 :style 与 scriptlet）
+! 直接整段粘贴到「我的过滤器」
+! ------------------------------------------------------------
+
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com###adblock-dialog
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##.fc-ab-root
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##.fc-whitelist-root
+
+! 选择器带 html 前缀，特异性高于站点的 body.no-scroll，才能压过它的 !important
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##html body.no-scroll:style(overflow-y: auto !important)
+
+! 正文容器被检测脚本设为 display:none 时强制恢复
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##html body #acontent:style(display: block !important)
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##html body #TextContent:style(display: block !important)
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##html body #volumes:style(display: block !important)
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##html body #volume-list:style(display: block !important)
+
+! 目录页：读取 checkAndHandleAdBlock 时中止当前脚本，阻止随机类名隐藏目录
+bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##+js(acs, checkAndHandleAdBlock)
+
+! ------------------------------------------------------------
+! 仅 AdGuard 时，上面的 ##+js 脚本规则需换成下面这一条
+! （元素隐藏与 :style 规则两家通用，不用重复添加）
+! ------------------------------------------------------------
+! bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com#%#//scriptlet('abort-on-property-read', 'checkAndHandleAdBlock')
+
+! ------------------------------------------------------------
+! Adblock Plus（不支持 :style 与 scriptlet，只能隐藏元素）
+! 注意：ABP 解除不了 no-scroll 滚动锁，隐藏弹窗后页面仍可能无法滑动。
+! 这种情况下请改用上面的 uBlock Origin / AdGuard 规则，或直接装本仓库的扩展。
+! ------------------------------------------------------------
+! bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com###adblock-dialog
+! bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##.fc-ab-root
+! bilinovel.com,bilinovel.net,bilinovel.org,bilinovel.de,bilinovel.co.uk,linovelib.com##.fc-whitelist-root
+
+! ------------------------------------------------------------
+! 故意没有包含的旧规则
+! ------------------------------------------------------------
+! 社区早期用过下面几条，针对的是已经下线的旧版混淆脚本，对现在的页面无效，
+! 而且 aeld 会误伤章节页里其它正常的 DOMContentLoaded 回调，所以不要添加：
+!   ##+js(aeld, DOMContentLoaded, _0x)
+!   ##+js(noeval-if, /adb/i)
+!   ##+js(nosiif, /adb/i)
