@@ -21,11 +21,9 @@
 **用 Git：**
 
 ```bash
-git clone https://github.com/用户名/仓库名.git
-cd 仓库名
+git clone https://github.com/Max919-star/bilinovel-unlock.git
+cd bilinovel-unlock
 ```
-
-把 `用户名/仓库名` 换成这个仓库的实际地址。
 
 **不用 Git：** 打开仓库页面，点绿色的 **Code**，再点 **Download ZIP**。解压后进入那个文件夹，确认这一层能直接看到 `manifest.json`，而不是还要再进一层。
 
@@ -79,10 +77,10 @@ node scripts/build.mjs
 3. 在扩展商店里搜索 **Tampermonkey**，点 **获取**，按提示安装。列表里如果已经有 Violentmonkey 或 ScriptCat，也可以用它们安装下面同一个脚本，不必再装一个管理器。
 4. 回到 **☰ → 扩展**，确认 Tampermonkey 已启用。
 
-再安装脚本。仓库推到 GitHub 之后，用手机 Edge 打开脚本的原始文件地址（把用户名、仓库名、分支换成实际值；默认分支一般是 `main`）：
+再安装脚本。用手机 Edge 打开脚本的原始文件地址：
 
 ```text
-https://github.com/用户名/仓库名/raw/main/dist/bilinovel-unlock.user.js
+https://github.com/Max919-star/bilinovel-unlock/raw/main/dist/bilinovel-unlock.user.js
 ```
 
 1. 页面跳到 Tampermonkey 的安装确认页，能看到脚本名 **哔轻反屏蔽解锁**。
